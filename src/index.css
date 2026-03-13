@@ -1,0 +1,46 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", "Pretendard", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Space Grotesk", "Samsung Sans", sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
+  
+  --color-brand-primary: #1428A0;
+  --color-brand-accent: #0C4DFF;
+  --color-brand-bg: #F6F8FC;
+  
+  --color-brand-50: #f0fdf4;
+  --color-brand-100: #dcfce7;
+  --color-brand-500: #1428A0;
+  --color-brand-600: #0C4DFF;
+  --color-brand-700: #0a1b7a;
+}
+
+@layer base {
+  body {
+    @apply font-sans bg-brand-bg text-slate-900;
+  }
+}
+
+.hero-title {
+  @apply text-[48px] font-bold tracking-tight leading-tight;
+  white-space: nowrap;
+}
+
+@media (max-width: 768px) {
+  .hero-title {
+    @apply text-3xl whitespace-normal;
+  }
+}
+
+.glass {
+  @apply bg-white/80 backdrop-blur-md border border-white/20 shadow-sm;
+}
+
+.card-hover {
+  @apply transition-all duration-300 hover:shadow-lg hover:-translate-y-1;
+}
+
+.compact-container {
+  @apply py-10 px-8 max-w-7xl mx-auto;
+}

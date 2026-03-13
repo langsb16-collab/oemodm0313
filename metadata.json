@@ -1,0 +1,9 @@
+{
+  "name": "Global OEM/ODM AI Platform",
+  "description": "AI-powered B2B manufacturing marketplace connecting global factories and brands with intelligent matching and production management.",
+  "requestFramePermissions": [
+    "camera",
+    "microphone",
+    "geolocation"
+  ]
+}

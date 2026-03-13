@@ -1,0 +1,86 @@
+{
+  "entities": {
+    "User": {
+      "title": "User",
+      "description": "User profile for buyers and factory representatives",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string" },
+        "email": { "type": "string", "format": "email" },
+        "displayName": { "type": "string" },
+        "role": { "type": "string", "enum": ["buyer", "factory", "admin"] },
+        "companyName": { "type": "string" },
+        "photoURL": { "type": "string" }
+      },
+      "required": ["uid", "email", "role"]
+    },
+    "Factory": {
+      "title": "Factory",
+      "description": "Manufacturing facility details",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "country": { "type": "string" },
+        "categories": { "type": "array", "items": { "type": "string" } },
+        "capacity": { "type": "string" },
+        "certifications": { "type": "array", "items": { "type": "string" } },
+        "moq": { "type": "number" },
+        "rating": { "type": "number" },
+        "description": { "type": "string" },
+        "images": { "type": "array", "items": { "type": "string" } }
+      },
+      "required": ["name", "country", "categories"]
+    },
+    "RFQ": {
+      "title": "RFQ",
+      "description": "Request for Quotation from a buyer",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "buyerId": { "type": "string" },
+        "productName": { "type": "string" },
+        "category": { "type": "string" },
+        "quantity": { "type": "number" },
+        "targetPrice": { "type": "number" },
+        "description": { "type": "string" },
+        "status": { "type": "string", "enum": ["pending", "quoted", "sampling", "production", "completed"] },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["buyerId", "productName", "quantity", "status"]
+    },
+    "Quote": {
+      "title": "Quote",
+      "description": "Quotation from a factory for an RFQ",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "rfqId": { "type": "string" },
+        "factoryId": { "type": "string" },
+        "price": { "type": "number" },
+        "leadTime": { "type": "number" },
+        "notes": { "type": "string" },
+        "status": { "type": "string", "enum": ["pending", "accepted", "rejected"] }
+      },
+      "required": ["rfqId", "factoryId", "price", "leadTime"]
+    }
+  },
+  "firestore": {
+    "/users/{uid}": {
+      "schema": "User",
+      "description": "User profiles"
+    },
+    "/factories/{factoryId}": {
+      "schema": "Factory",
+      "description": "Global factory database"
+    },
+    "/rfqs/{rfqId}": {
+      "schema": "RFQ",
+      "description": "Buyer requests"
+    },
+    "/quotes/{quoteId}": {
+      "schema": "Quote",
+      "description": "Factory quotations"
+    }
+  }
+}
